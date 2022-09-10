@@ -54,6 +54,8 @@ class Text {
         return "INVALID COLOR";
     }
 
+    // TODO add dialogue() that takes in a list of strings and spaces them out, with [RET]. see how many features you can cram in (slow/instant, color, etc)
+
     /** clear screen */
     public static void cls() {
         if (useANSI) {
