@@ -3,7 +3,7 @@ import java.lang.Thread;
 class Text {
     public static boolean useANSI = true;  // enable ANSI features like color and fast screen clear
     public static int linesClearedNoANSI = 50;  // lines that .cls() inserts if useANSI is false
-    public static final int PRINT_WAIT = 30; // time between slowPrint() characters in milliseconds
+    public static final int printWait = 30; // time between slowPrint() characters in milliseconds
     
     // ANSI escape codes that turn letters after it a color
     public static final String[][] ANSI_COLORS = {
@@ -30,12 +30,12 @@ class Text {
     
     /** prints out a colored string slowly, one char at a time */
     public static void slowPrint(String str, String color) {
-        if (useANSI) System.out.print(ansiColor(color));
+        if (useANSI) System.out.print(getAnsiColorCode(color));
         
         try {
             for(int i = 0; i < str.length(); i++) {
                 System.out.print(str.charAt(i));
-                Thread.sleep(PRINT_WAIT);
+                Thread.sleep(printWait);
             }
         } catch(Exception e) {
             System.out.println(e);
@@ -43,7 +43,7 @@ class Text {
     }
 
     /** returns the ANSI escape code that turns letters after it a color */
-    public static String ansiColor(String color) {
+    public static String getAnsiColorCode(String color) {
         for(String[] colorDict : ANSI_COLORS) {
             if(colorDict[0].equals(color)) {
                 return colorDict[1];
